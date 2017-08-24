@@ -1,0 +1,29 @@
+
+repositories {
+    mavenCentral()
+
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.11'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "info.solidsoft.pitest"
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'pl.pragmatists:JUnitParams:1.1.0'
+    testCompile 'org.pitest:pitest:1.2.2'
+}
+
+pitest {
+    targetClasses = ['com.example.*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+}
